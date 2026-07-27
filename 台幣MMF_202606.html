@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>台幣貨幣市場基金 月度摘要 2026.06</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;600;700;900&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+:root{
+  --paper:#F3F5F2;
+  --card:#FCFDFC;
+  --ink:#1C2B26;
+  --ink-soft:#4A5B54;
+  --ink-faint:#8A968F;
+  --line:#DDE4DF;
+  --pine:#205C4C;
+  --teal:#4E8F7D;
+  --sage:#A9C6B9;
+  --mist:#D7E3DC;
+  --seal:#B2402A;
+  --up:#B93A2B;   /* 台股慣例：紅漲 */
+  --dn:#1E7F4F;   /* 綠跌 */
+  --serif:"Noto Serif TC","PMingLiU",serif;
+  --sans:"Noto Sans TC","Microsoft JhengHei",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto} *{animation:none!important;transition:none!important}}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:0 28px 64px}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+
+/* ---------- header ---------- */
+header{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;padding:44px 0 26px;border-bottom:3px solid var(--ink)}
+.eyebrow{font-size:12px;letter-spacing:.32em;color:var(--pine);font-weight:700;margin-bottom:10px}
+h1{font-family:var(--serif);font-weight:900;font-size:clamp(28px,4.4vw,44px);line-height:1.2;letter-spacing:.02em}
+h1 small{display:block;font-size:15px;font-weight:600;color:var(--ink-soft);letter-spacing:.14em;margin-top:8px}
+.seal{flex:none;width:86px;height:86px;border:3px solid var(--seal);color:var(--seal);border-radius:6px;display:grid;place-items:center;font-family:var(--serif);font-weight:900;font-size:19px;line-height:1.35;text-align:center;letter-spacing:.12em;transform:rotate(4deg);padding:6px;box-shadow:0 0 0 1px rgba(178,64,42,.25) inset;user-select:none}
+
+/* ---------- hero ---------- */
+.hero{display:grid;grid-template-columns:290px 1fr;gap:36px;align-items:end;padding:34px 0 10px}
+.hero-num .label{font-size:13px;letter-spacing:.22em;color:var(--ink-soft);font-weight:700}
+.hero-num .big{font-family:var(--serif);font-weight:900;font-size:64px;line-height:1.05;margin:6px 0 2px}
+.hero-num .big em{font-style:normal;font-size:22px;font-weight:700;color:var(--ink-soft);margin-left:6px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.chip{border:1.5px solid var(--line);background:var(--card);border-radius:99px;padding:5px 13px;font-size:13px;color:var(--ink-soft)}
+.chip b{font-family:var(--mono);font-weight:600;color:var(--ink);margin-left:5px}
+.chip b.up{color:var(--up)} .chip b.dn{color:var(--dn)}
+.chart-box{position:relative}
+.chart-box svg{display:block;width:100%;height:auto}
+.tip{position:absolute;pointer-events:none;background:var(--ink);color:#fff;font-size:12.5px;padding:7px 11px;border-radius:6px;opacity:0;transform:translate(-50%,-115%);white-space:nowrap;transition:opacity .12s}
+.tip b{font-family:var(--mono);font-weight:600}
+
+/* ---------- sections ---------- */
+section{margin-top:52px}
+section.fold .sec-head{cursor:pointer}
+.chev{flex:none;border:1.5px solid var(--line);background:var(--card);color:var(--ink-soft);width:26px;height:26px;border-radius:6px;font-size:13px;line-height:1;cursor:pointer;transition:transform .25s ease;display:grid;place-items:center;align-self:center}
+.chev:hover{border-color:var(--pine);color:var(--pine)}
+.chev:focus-visible{outline:2px solid var(--pine);outline-offset:2px}
+section.closed .chev{transform:rotate(-90deg)}
+.fold-body{display:grid;grid-template-rows:1fr;transition:grid-template-rows .3s ease}
+.fold-inner{min-width:0;overflow:hidden}
+section.closed .fold-body{grid-template-rows:0fr}
+.sec-head{display:flex;align-items:baseline;justify-content:flex-start;gap:14px;row-gap:6px;flex-wrap:wrap;border-bottom:1.5px solid var(--line);padding-bottom:10px;margin-bottom:22px}
+.sec-head .chev{margin-left:auto}
+h2{font-family:var(--serif);font-weight:700;font-size:22px;letter-spacing:.06em;white-space:nowrap}
+h2::before{content:"";display:inline-block;width:10px;height:10px;background:var(--pine);margin-right:11px;transform:rotate(45deg) translateY(-2px)}
+.sec-note{font-size:12.5px;color:var(--ink-faint)}
+
+.rank-idx{font-family:var(--mono);font-size:12px;color:var(--ink-faint);text-align:right}
+.rank-name{font-weight:500;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@keyframes grow{from{transform:scaleX(0)}}
+.rank-val{display:flex;justify-content:flex-end;align-items:baseline;gap:14px;font-size:13.5px}
+.rank-val .v{font-family:var(--mono);font-weight:600;min-width:60px;text-align:right}
+.rank-val .delta{min-width:64px;text-align:right}
+.delta{font-family:var(--mono);font-size:12px}
+.delta.up{color:var(--up)} .delta.dn{color:var(--dn)} .delta.na{color:var(--ink-faint)}
+
+.co-row{display:grid;grid-template-columns:22px 204px 1fr 248px;gap:12px;align-items:center;padding:8px 0;border-bottom:1px dashed var(--line)}
+.co-row:last-child{border-bottom:none}
+.co-row.market{padding:10px 0 14px;margin-bottom:6px;border-bottom:1.5px solid var(--line)}
+.co-row:not(.market){cursor:pointer}
+.co-caret{display:inline-block;font-size:9px;color:var(--ink-faint);margin-left:7px;transition:transform .2s ease;transform:translateY(-1px)}
+.co-row.open .co-caret{transform:rotate(90deg) translateX(-1px)}
+.co-sub{display:grid;grid-template-rows:0fr;transition:grid-template-rows .25s ease}
+.co-sub.open{grid-template-rows:1fr}
+.co-sub>div{overflow:hidden}
+.co-sub-row{display:grid;grid-template-columns:22px 204px 1fr 248px;gap:12px;align-items:center;padding:4px 0}
+.co-sub-row:first-child{padding-top:8px}
+.co-sub-row:last-child{padding-bottom:10px}
+.co-sub-name{font-size:12.5px;color:var(--ink-soft);padding-left:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.co-sub-bar{height:10px;background:transparent;border-radius:2px;overflow:hidden}
+.co-sub-bar i{display:block;height:100%;background:var(--sage);border-radius:2px}
+.co-sub-val{display:flex;justify-content:flex-end;align-items:baseline;gap:14px;font-size:12.5px}
+.co-sub-val .v{font-family:var(--mono);font-weight:500;min-width:66px;text-align:right}
+.co-sub-val .delta{min-width:56px;text-align:right}
+.co-sub-val .share{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);min-width:52px;text-align:right;visibility:hidden}
+.co-row.market .co-name{font-weight:700}
+.co-name{font-weight:700;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.co-name small{font-weight:400;color:var(--ink-faint);font-size:12px;margin-left:4px}
+.co-bar{height:18px;background:var(--mist);border-radius:3px;overflow:hidden}
+.co-bar i{display:block;height:100%;background:linear-gradient(90deg,#173F35,var(--pine) 60%,var(--teal));border-radius:3px;transform-origin:left;animation:grow .7s ease both}
+.co-val{display:flex;justify-content:flex-end;align-items:baseline;gap:14px;font-size:13.5px}
+.co-val .v{font-family:var(--mono);font-weight:600;min-width:66px;text-align:right}
+.co-val .delta{min-width:56px;text-align:right}
+.co-val .share{font-family:var(--mono);font-size:12px;color:var(--ink-faint);min-width:52px;text-align:right}
+@media (max-width:860px){.co-row,.co-sub-row{grid-template-columns:20px 142px 1fr 86px}.co-val .share{min-width:0}.co-sub-val{flex-direction:column;align-items:flex-end;gap:1px}.co-sub-val .v,.co-sub-val .delta{min-width:0}.co-sub-val .share{display:none}}
+.obs-card{background:var(--card);border:1.5px solid var(--line);border-radius:10px;padding:24px 30px 20px}
+.obs-card h3{font-family:var(--serif);font-size:16px;font-weight:700;letter-spacing:.08em;color:var(--pine);margin:22px 0 8px;padding-left:12px;border-left:3px solid var(--pine)}
+.obs-card h3:first-child{margin-top:0}
+.obs-card p{font-size:14px;color:var(--ink-soft);text-align:justify;margin-bottom:12px}
+.obs-card p:last-child{margin-bottom:0}
+.obs-card p b{color:var(--ink)}
+.obs-card ul{list-style:none;margin:2px 0 12px;padding:0}
+.obs-card li{position:relative;padding:5px 0 5px 20px;font-size:14px;color:var(--ink-soft);text-align:justify}
+.obs-card li::before{content:"";position:absolute;left:2px;top:13px;width:7px;height:7px;background:var(--pine);transform:rotate(45deg)}
+.obs-card li b{color:var(--ink)}
+.obs-card .num{font-weight:600}
+.obs-card .up{color:var(--up)} .obs-card .dn{color:var(--dn)}
+
+.mix-row{display:grid;grid-template-columns:22px 152px 1fr 152px;gap:12px;align-items:center;padding:7px 0;border-bottom:1px dashed var(--line)}
+.mix-row:last-child{border-bottom:none}
+.mix-row.market{padding:10px 0 14px;margin-bottom:6px;border-bottom:1.5px solid var(--line)}
+.mix-row.market .rank-name{font-weight:700}
+.mix-track{min-width:0}
+.mix-bar{display:flex;height:20px;border-radius:3px;overflow:hidden;transform-origin:left;animation:grow .7s ease both}
+.mix-bar span{height:100%;display:grid;place-items:center;font-family:var(--mono);font-size:10.5px;color:#fff;overflow:hidden;white-space:nowrap}
+.mix-bar span:nth-child(1){background:#205C4C}
+.mix-bar span:nth-child(2){background:#3D6B99}
+.mix-bar span:nth-child(3){background:#C8A24B;color:#3A3320}
+.mix-bar span:nth-child(4){background:#C4C9C6;color:var(--ink)}
+.mix-bar.empty{background:var(--mist)}
+
+.legend{display:flex;gap:18px;font-size:12.5px;color:var(--ink-soft);flex-wrap:nowrap}
+.legend span{white-space:nowrap}
+.legend i{display:inline-block;width:11px;height:11px;border-radius:2px;margin-right:6px;transform:translateY(1px)}
+
+
+footer{margin-top:56px;padding-top:18px;border-top:3px solid var(--ink);display:flex;justify-content:space-between;gap:16px;font-size:12px;color:var(--ink-faint)}
+
+@media (max-width:860px){
+  .hero{grid-template-columns:1fr;gap:20px}
+  .mix-row{grid-template-columns:20px 112px 1fr 78px;gap:8px}
+  .mix-row.market .rank-name{font-size:13px}
+  .mix-row .rank-val,.co-row .co-val{flex-direction:column;align-items:flex-end;gap:2px}
+  .mix-row .rank-val .v,.co-row .co-val .v{min-width:0}
+  .mix-row .rank-val .delta,.co-row .co-val .delta{min-width:0}
+  .seal{width:68px;height:68px;font-size:15px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div>
+    <div class="eyebrow">MONTHLY SNAPSHOT · 資料期間 2025.06 – 2026.06</div>
+    <h1>台幣貨幣市場基金</h1>
+  </div>
+  <div class="seal" aria-hidden="true">貨幣市場月報</div>
+</header>
+
+<div class="hero">
+  <div class="hero-num">
+    <div class="label">2026年6月 市場總規模</div>
+    <div class="big"><span class="num" id="totalNum"></span><em>億元</em></div>
+    <div class="chips" id="chips"></div>
+  </div>
+  <div class="chart-box" id="trendBox">
+    <svg id="trend" viewBox="0 0 700 240" role="img" aria-label="市場總規模十五個月趨勢圖"></svg>
+    <div class="tip" id="trendTip"></div>
+  </div>
+</div>
+
+<section>
+  <div class="sec-head">
+    <h2>本月觀察</h2>
+    <div class="sec-note">2026.06</div>
+  <button class="chev" aria-label="收合或展開此區塊">▾</button></div>
+  <div class="fold-body"><div class="fold-inner"><div class="obs-card" id="highlights"></div></div></div>
+</section>
+
+<section>
+  <div class="sec-head">
+    <h2>投信規模排名</h2>
+    <div class="sec-note">依基金名稱前綴歸類 · 括號內為旗下檔數 · 市占以總規模計 · 右側數字依序為規模、月增減、市占率</div>
+  <button class="chev" aria-label="收合或展開此區塊">▾</button></div>
+  <div class="fold-body"><div class="fold-inner"><div id="coList"></div></div></div>
+</section>
+
+<section>
+  <div class="sec-head">
+    <h2>基金資產配置<span class="sec-note" style="margin-left:12px">節錄前10大基金 · 長度代表規模 · 顏色為資產配置</span></h2>
+    <div class="legend">
+      <span><i style="background:#205C4C"></i>定存</span>
+      <span><i style="background:#3D6B99"></i>短期票券</span>
+      <span><i style="background:#C8A24B"></i>附條件交易</span>
+      <span><i style="background:#C4C9C6"></i>其他</span>
+    </div>
+  <button class="chev" aria-label="收合或展開此區塊">▾</button></div>
+  <div class="fold-body"><div class="fold-inner"><div id="mixList"></div></div></div>
+</section>
+
+<footer>
+  <span>資料來源：各基金月報、投信投顧公會</span>
+  <span>年增減比較基準：2025.06 · 規模單位：新台幣億元</span>
+</footer>
+
+</div>
+
+<script>
+const D = {"months": ["202506", "202507", "202508", "202509", "202510", "202511", "202512", "202601", "202602", "202603", "202604", "202605", "202606"], "total_series": [10819.8, 11298.2, 11675.4, 11573.7, 12146.2, 12175.5, 12356.5, 12216.9, 12046.0, 12232.4, 12183.4, 12131.6, 12039.6], "latest": "202606", "total": 12039.6, "total_mom": -92.0, "total_yoy": 1219.8, "fund_count": 36, "top5_share": 39.6, "mkt_alloc": [40.2, 52.0, 7.3, 0.5], "funds": [{"name": "台新1699", "co": "台新", "aum": 1309.91, "mom": -4.39, "yoy": 174.41, "alloc": [50.54, 46.99, 2.22, 0.25]}, {"name": "統一強棒", "co": "統一", "aum": 1067.29, "mom": -101.89, "yoy": 189.29, "alloc": [68.44, 29.92, 1.18, 0.46]}, {"name": "兆豐寶鑽", "co": "兆豐", "aum": 829.37, "mom": -28.99, "yoy": 134.95, "alloc": [49.52, 46.15, 3.77, 0.56]}, {"name": "國泰台灣貨幣", "co": "國泰", "aum": 819.42, "mom": 51.74, "yoy": 66.54, "alloc": [34.47, 60.71, 3.08, 1.74]}, {"name": "群益安穩", "co": "群益", "aum": 742.72, "mom": -10.64, "yoy": -113.65, "alloc": [28.5, 64.39, 6.64, 0.47]}, {"name": "第一金台灣貨幣", "co": "第一金", "aum": 672.92, "mom": -8.41, "yoy": 39.79, "alloc": [34.94, 49.65, 15.14, 0.27]}, {"name": "富邦貨幣", "co": "富邦", "aum": 664.29, "mom": -10.73, "yoy": 181.21, "alloc": [63.08, 30.59, 6.07, 0.26]}, {"name": "中信華盈", "co": "中國信託", "aum": 647.72, "mom": -4.59, "yoy": 110.46, "alloc": [39.9, 50.3, 9.7, 0.1]}, {"name": "富邦吉祥", "co": "富邦", "aum": 597.69, "mom": -29.22, "yoy": -101.78, "alloc": [51.04, 43.28, 5.12, 0.56]}, {"name": "台新大眾", "co": "台新", "aum": 501.82, "mom": 10.47, "yoy": 136.12, "alloc": [50.49, 45.31, 4.08, 0.12]}, {"name": "華南鳳翔", "co": "華南永昌", "aum": 413.04, "mom": -3.33, "yoy": -3.56, "alloc": [13.56, 84.42, 1.3, 0.72]}, {"name": "元大得利", "co": "元大", "aum": 405.02, "mom": -14.03, "yoy": 44.88, "alloc": [28.49, 52.1, 19.17, 0.24]}, {"name": "永豐貨幣", "co": "永豐", "aum": 365.28, "mom": -0.85, "yoy": 48.62, "alloc": [35.7, 54.16, 9.8, 0.34]}, {"name": "元大萬泰", "co": "元大", "aum": 333.24, "mom": 12.71, "yoy": 9.14, "alloc": [24.87, 56.62, 18.19, 0.32]}, {"name": "富蘭克林華美貨幣", "co": "富蘭克林華美", "aum": 318.28, "mom": -27.28, "yoy": 81.7, "alloc": [51.3, 44.58, 3.85, 0.27]}, {"name": "合庫貨幣", "co": "合庫", "aum": 291.93, "mom": 30.85, "yoy": -15.65, "alloc": [11.31, 82.16, 6.12, 0.41]}, {"name": "安聯台灣貨幣", "co": "安聯", "aum": 261.01, "mom": 27.5, "yoy": 35.01, "alloc": [10.75, 82.7, 6.33, 0.22]}, {"name": "聯邦貨幣", "co": "聯邦", "aum": 248.77, "mom": -21.67, "yoy": 42.6, "alloc": [40.81, 54.13, 4.65, 0.41]}, {"name": "台新吉星", "co": "台新", "aum": 235.59, "mom": 10.71, "yoy": -8.18, "alloc": [35.78, 56.88, 6.97, 0.37]}, {"name": "第一金全家福", "co": "第一金", "aum": 215.89, "mom": 5.34, "yoy": -45.21, "alloc": [18.39, 61.52, 19.84, 0.25]}, {"name": "元大得寶", "co": "元大", "aum": 214.25, "mom": -3.97, "yoy": 39.13, "alloc": [18.35, 64.19, 17.29, 0.17]}, {"name": "玉山貨幣", "co": "玉山", "aum": 202.93, "mom": 17.47, "yoy": 55.02, "alloc": [17.05, 67.07, 15.45, 0.43]}, {"name": "復華貨幣", "co": "復華", "aum": 171.35, "mom": 1.53, "yoy": -8.69, "alloc": [18.53, 66.61, 14.19, 0.67]}, {"name": "統一全方位", "co": "統一", "aum": 116.57, "mom": 15.16, "yoy": null, "alloc": [24.45, 72.36, 2.86, 0.33]}, {"name": "瀚亞威寶", "co": "瀚亞", "aum": 102.14, "mom": -2.03, "yoy": -14.61, "alloc": [18.9, 50.3, 29.6, 1.2]}, {"name": "野村貨幣", "co": "野村", "aum": 57.33, "mom": 4.16, "yoy": 10.31, "alloc": [41.4, 24.2, 34.2, 0.2]}, {"name": "柏瑞巨輪", "co": "柏瑞", "aum": 51.29, "mom": -1.07, "yoy": -1.86, "alloc": [45.75, 48.74, 4.35, 1.16]}, {"name": "華南麒麟", "co": "華南永昌", "aum": 41.8, "mom": -3.56, "yoy": 3.44, "alloc": [4.78, 93.79, 0, 1.43]}, {"name": "摩根第一貨幣", "co": "摩根", "aum": 41.13, "mom": 2.25, "yoy": 6.11, "alloc": [8.3, 76.6, 15, 0.1]}, {"name": "凱基凱旋", "co": "凱基", "aum": 29, "mom": 1.62, "yoy": -0.98, "alloc": [37.9, 35.81, 25.83, 0.46]}, {"name": "復華有利", "co": "復華", "aum": 28.71, "mom": -1.21, "yoy": 4.14, "alloc": [11.32, 77.9, 9.58, 1.2]}, {"name": "德銀遠東台灣貨幣", "co": "德銀遠東", "aum": 19.51, "mom": -6.75, "yoy": 3.07, "alloc": [69.2, 10.2, 20.22, 0.38]}, {"name": "台中銀萬保", "co": "台中銀", "aum": 10.15, "mom": 2.4, "yoy": 0.55, "alloc": [31.84, 28.36, 39.77, 0.03]}, {"name": "景順貨幣", "co": "景順", "aum": 6.16, "mom": -0.64, "yoy": -0.08, "alloc": [11.39, 50.2, 38.37, 0.04]}, {"name": "街口平安", "co": "街口", "aum": 3.95, "mom": -0.62, "yoy": 1.08, "alloc": [0.39, 70.63, 28.86, 0.12]}, {"name": "宏利萬利", "co": "宏利", "aum": 2.12, "mom": -0.01, "yoy": -0.05, "alloc": [47.09, 0, 44.18, 8.73]}], "companies": [{"co": "台新", "aum": 2047.32, "mom": 16.79, "n": 3, "share": 17.0, "funds": ["台新1699", "台新大眾", "台新吉星"]}, {"co": "富邦", "aum": 1261.98, "mom": -39.95, "n": 2, "share": 10.5, "funds": ["富邦貨幣", "富邦吉祥"]}, {"co": "統一", "aum": 1183.86, "mom": -86.73, "n": 2, "share": 9.8, "funds": ["統一強棒", "統一全方位"]}, {"co": "元大", "aum": 952.51, "mom": -5.29, "n": 3, "share": 7.9, "funds": ["元大得利", "元大萬泰", "元大得寶"]}, {"co": "第一金", "aum": 888.81, "mom": -3.07, "n": 2, "share": 7.4, "funds": ["第一金台灣貨幣", "第一金全家福"]}, {"co": "兆豐", "aum": 829.37, "mom": -28.99, "n": 1, "share": 6.9, "funds": ["兆豐寶鑽"]}, {"co": "國泰", "aum": 819.42, "mom": 51.74, "n": 1, "share": 6.8, "funds": ["國泰台灣貨幣"]}, {"co": "群益", "aum": 742.72, "mom": -10.64, "n": 1, "share": 6.2, "funds": ["群益安穩"]}, {"co": "中國信託", "aum": 647.72, "mom": -4.59, "n": 1, "share": 5.4, "funds": ["中信華盈"]}, {"co": "華南永昌", "aum": 454.84, "mom": -6.89, "n": 2, "share": 3.8, "funds": ["華南鳳翔", "華南麒麟"]}, {"co": "永豐", "aum": 365.28, "mom": -0.85, "n": 1, "share": 3.0, "funds": ["永豐貨幣"]}, {"co": "富蘭克林華美", "aum": 318.28, "mom": -27.28, "n": 1, "share": 2.6, "funds": ["富蘭克林華美貨幣"]}, {"co": "合庫", "aum": 291.93, "mom": 30.85, "n": 1, "share": 2.4, "funds": ["合庫貨幣"]}, {"co": "安聯", "aum": 261.01, "mom": 27.5, "n": 1, "share": 2.2, "funds": ["安聯台灣貨幣"]}, {"co": "聯邦", "aum": 248.77, "mom": -21.67, "n": 1, "share": 2.1, "funds": ["聯邦貨幣"]}, {"co": "玉山", "aum": 202.93, "mom": 17.47, "n": 1, "share": 1.7, "funds": ["玉山貨幣"]}, {"co": "復華", "aum": 200.06, "mom": 0.32, "n": 2, "share": 1.7, "funds": ["復華貨幣", "復華有利"]}, {"co": "瀚亞", "aum": 102.14, "mom": -2.03, "n": 1, "share": 0.8, "funds": ["瀚亞威寶"]}, {"co": "野村", "aum": 57.33, "mom": 4.16, "n": 1, "share": 0.5, "funds": ["野村貨幣"]}, {"co": "柏瑞", "aum": 51.29, "mom": -1.07, "n": 1, "share": 0.4, "funds": ["柏瑞巨輪"]}, {"co": "摩根", "aum": 41.13, "mom": 2.25, "n": 1, "share": 0.3, "funds": ["摩根第一貨幣"]}, {"co": "凱基", "aum": 29, "mom": 1.62, "n": 1, "share": 0.2, "funds": ["凱基凱旋"]}, {"co": "德銀遠東", "aum": 19.51, "mom": -6.75, "n": 1, "share": 0.2, "funds": ["德銀遠東台灣貨幣"]}, {"co": "台中銀", "aum": 10.15, "mom": 2.4, "n": 1, "share": 0.1, "funds": ["台中銀萬保"]}, {"co": "景順", "aum": 6.16, "mom": -0.64, "n": 1, "share": 0.1, "funds": ["景順貨幣"]}, {"co": "街口", "aum": 3.95, "mom": -0.62, "n": 1, "share": 0.0, "funds": ["街口平安"]}, {"co": "宏利", "aum": 2.12, "mom": -0.01, "n": 1, "share": 0.0, "funds": ["宏利萬利"]}]};
+
+const fmt = (v,d=1)=> v==null ? '—' : v.toLocaleString('zh-TW',{minimumFractionDigits:d,maximumFractionDigits:d});
+const sign = v => v>0? '+'+fmt(v) : fmt(v);
+const cls  = v => v==null? 'na' : v>0? 'up' : v<0? 'dn' : '';
+const mLabel = m => m.slice(0,4)+'.'+m.slice(4);
+
+/* ---- hero ---- */
+document.getElementById('totalNum').textContent = fmt(D.total,0);
+document.getElementById('chips').innerHTML = `
+  <span class="chip">月增減<b class="${cls(D.total_mom)}">${sign(D.total_mom)}</b></span>
+  <span class="chip">年增減<b class="${cls(D.total_yoy)}">${sign(D.total_yoy)}</b></span>
+  <span class="chip">基金檔數<b>${D.fund_count}</b></span>
+  <span class="chip">前五大基金市占<b>${fmt(D.top5_share)}%</b></span>`;
+
+/* ---- trend chart (SVG) ---- */
+(function(){
+  const svg = document.getElementById('trend');
+  const W=700,H=240,pl=54,pr=14,pt=16,pb=30;
+  const xs=D.months, ys=D.total_series;
+  const ymin=Math.floor(Math.min(...ys)/500)*500-200;
+  const ymax=Math.ceil(Math.max(...ys)/500)*500;
+  const X=i=> pl+(W-pl-pr)*i/(xs.length-1);
+  const Y=v=> pt+(H-pt-pb)*(1-(v-ymin)/(ymax-ymin));
+  let g='';
+  for(let v=Math.ceil(ymin/1000)*1000; v<=ymax; v+=1000){
+    g+=`<line x1="${pl}" x2="${W-pr}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--line)" stroke-width="1"/>`
+      +`<text x="${pl-9}" y="${Y(v)+4}" text-anchor="end" font-size="10.5" fill="var(--ink-faint)" font-family="IBM Plex Mono,monospace">${v.toLocaleString()}</text>`;
+  }
+  let path='', area=`M ${X(0)} ${Y(ys[0])}`;
+  ys.forEach((v,i)=>{ path+= (i?'L':'M')+` ${X(i)} ${Y(v)} `; if(i) area+=` L ${X(i)} ${Y(v)}`; });
+  area+=` L ${X(ys.length-1)} ${H-pb} L ${X(0)} ${H-pb} Z`;
+  let lbls='';
+  xs.forEach((m,i)=>{ if(i%3===0||i===xs.length-1){
+    const last = i===xs.length-1;
+    lbls+=`<text x="${last? X(i)+6 : X(i)}" y="${H-9}" text-anchor="${last?'end':'middle'}" font-size="10.5" fill="var(--ink-faint)" font-family="IBM Plex Mono,monospace">${mLabel(m)}</text>`;}});
+  const last=ys.length-1;
+  svg.innerHTML = `
+    <defs><linearGradient id="ag" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4E8F7D" stop-opacity=".35"/><stop offset="1" stop-color="#4E8F7D" stop-opacity=".03"/>
+    </linearGradient></defs>
+    ${g}
+    <path d="${area}" fill="url(#ag)"/>
+    <path d="${path}" fill="none" stroke="var(--pine)" stroke-width="2.5" stroke-linejoin="round"/>
+    ${lbls}
+    <line id="cursor" y1="${pt}" y2="${H-pb}" stroke="var(--ink)" stroke-width="1" stroke-dasharray="3 3" opacity="0"/>
+    <circle id="dotHover" r="4.5" fill="var(--pine)" stroke="#fff" stroke-width="2" opacity="0"/>
+    <circle cx="${X(last)}" cy="${Y(ys[last])}" r="4.5" fill="var(--seal)" stroke="#fff" stroke-width="2"/>
+    <rect id="hit" x="${pl}" y="0" width="${W-pl-pr}" height="${H}" fill="transparent"/>`;
+  const box=document.getElementById('trendBox'), tip=document.getElementById('trendTip');
+  const cursor=svg.querySelector('#cursor'), dot=svg.querySelector('#dotHover');
+  svg.querySelector('#hit').addEventListener('mousemove',e=>{
+    const r=svg.getBoundingClientRect(), sx=W/r.width;
+    const px=(e.clientX-r.left)*sx;
+    const i=Math.max(0,Math.min(xs.length-1,Math.round((px-pl)/(W-pl-pr)*(xs.length-1))));
+    cursor.setAttribute('x1',X(i)); cursor.setAttribute('x2',X(i)); cursor.setAttribute('opacity',1);
+    dot.setAttribute('cx',X(i)); dot.setAttribute('cy',Y(ys[i])); dot.setAttribute('opacity',1);
+    tip.style.opacity=1;
+    tip.style.left=(X(i)/sx)+'px';
+    tip.style.top=(Y(ys[i])/ (H/r.height))+'px';
+    tip.innerHTML=`${mLabel(xs[i])} 總規模 <b>${fmt(ys[i],0)}</b> 億`;
+  });
+  svg.querySelector('#hit').addEventListener('mouseleave',()=>{
+    cursor.setAttribute('opacity',0); dot.setAttribute('opacity',0); tip.style.opacity=0;
+  });
+})();
+
+
+/* ---- highlights ---- */
+document.getElementById('highlights').innerHTML = `
+  <p>2026年6月台幣貨幣市場基金總規模為 <b class="num">12,039.6億元</b>，單月減少 <b class="num dn">92.0億</b>，為連續第二個月下滑；惟仍較去年同期增加 <b class="num up">1,219.8億</b>，年增率達 <b class="num up">11.3%</b>。回顧近一年走勢，市場規模於2025年下半年大幅擴張 <b class="num up">1,536.7億</b>，並於2025年12月觸及 <b class="num">12,356.5億</b>的高點；2026年上半年則自高點回落 <b class="num dn">316.9億</b>，其中第二季減少 192.8億。</p>
+  <p>個別基金消長方面，本月呈現「少數吸金、多數流出」的格局：36 檔基金中僅 14 檔規模上升、22 檔下滑，前十大基金合計淨流出 <b class="num dn">136.7億</b>。<b>國泰台灣貨幣</b>單月增加 <b class="num up">51.7億</b>為本月吸金之冠，規模升至 819.4億、與第三名兆豐寶鑽的差距縮小至 10億以內；<b>統一強棒</b>則減少 <b class="num dn">101.9億</b>為流出最多，規模自 1,169億縮至 1,067億，但拉長期間看，其年增 <b class="num up">189.3億</b>仍居全市場首位，累積動能未變。龍頭<b>台新1699</b>本月微減 4.4億、以 1,309.9億續居第一，與第二名的差距擴大至 242億。</p>
+  <p>就流出原因觀察，主要來自三方面：</p>
+  <ul>
+    <li><b>台股熱絡、風險偏好升溫</b>：指數在AI科技題材帶動下表現亮眼，部分停泊的短期資金轉進股市。</li>
+    <li><b>除權息旺季效應</b>：6月下旬起進入除權息高峰期，投資人贖回貨幣基金卡位股息，企業亦需備妥資金發放股利。</li>
+    <li><b>季底資金調度</b>：6月適逢半年底，企業半年報作帳與營運資金需求升溫，券商並大量發行商業本票，貨幣市場資金趨於緊俏、短期利率上揚，法人例行性贖回以支應調度。</li>
+  </ul>
+  <p>整體而言，本波流出屬季節性與資金輪動性質，市場規模仍維持在 1.2兆的歷史高檔區間。</p>`;
+
+/* ---- company ranking ---- */
+(function(){
+  const cs=D.companies, max=cs[0].aum;
+  const byName = Object.fromEntries(D.funds.map(f=>[f.name,f]));
+  let html = `<div class="co-row market">
+      <span class="rank-idx"></span>
+      <span class="co-name">基金總規模<small>(${D.fund_count}檔)</small></span>
+      <span class="co-bar"><i style="width:100%;background:var(--ink)"></i></span>
+      <span class="co-val">
+        <span class="v">${fmt(D.total)}</span>
+        <span class="delta ${cls(D.total_mom)}">${sign(D.total_mom)}</span>
+        <span class="share">100.0%</span>
+      </span>
+    </div>`;
+  html += cs.map((c,i)=>{
+    const subs = c.funds.map(n=>byName[n]).sort((a,b)=>(b.aum||0)-(a.aum||0)).map(f=>`
+      <div class="co-sub-row">
+        <span class="rank-idx"></span>
+        <span class="co-sub-name" title="${f.name}">${f.name}</span>
+        <span class="co-sub-bar"><i style="width:${(f.aum/max*100).toFixed(1)}%"></i></span>
+        <span class="co-sub-val">
+          <span class="v">${fmt(f.aum)}</span>
+          <span class="delta ${cls(f.mom)}">${f.mom==null?'—':sign(f.mom)}</span>
+          <span class="share">0</span>
+        </span>
+      </div>`).join('');
+    return `
+    <div class="co-row" data-i="${i}">
+      <span class="rank-idx">${String(i+1).padStart(2,'0')}</span>
+      <span class="co-name" title="${c.funds.join('、')}">${c.co}投信${c.n>1?`<small>(${c.n})</small>`:''}<span class="co-caret">▶</span></span>
+      <span class="co-bar"><i style="width:${(c.aum/max*100).toFixed(1)}%;animation-delay:${i*30}ms"></i></span>
+      <span class="co-val">
+        <span class="v">${fmt(c.aum)}</span>
+        <span class="delta ${cls(c.mom)}">${c.mom==null?'—':sign(c.mom)}</span>
+        <span class="share">${fmt(c.share)}%</span>
+      </span>
+    </div>
+    <div class="co-sub"><div>${subs}</div></div>`;
+  }).join('');
+  const el=document.getElementById('coList');
+  el.innerHTML=html;
+  el.querySelectorAll('.co-row:not(.market)').forEach(row=>{
+    row.addEventListener('click',()=>{
+      row.classList.toggle('open');
+      row.nextElementSibling.classList.toggle('open');
+    });
+  });
+})();
+
+/* ---- fund ranking × allocation (merged) ---- */
+(function(){
+  const top=D.funds.slice(0,10), max=top[0].aum;
+  const CATS=['定存','短期票券','附條件交易','其他'];
+  const segs=(a,scale)=> a[0]==null
+    ? `<div class="mix-bar empty" style="width:${scale}%" title="配置資料缺漏"></div>`
+    : `<div class="mix-bar" style="width:${scale}%">${a.map((v,i)=>
+        `<span style="width:${v??0}%" title="${CATS[i]} ${fmt(v)}%">${i<2 && (scale*(v??0)/100)>=4? fmt(v,0)+'%':''}</span>`).join('')}</div>`;
+  let html = `<div class="mix-row market">
+      <span class="rank-idx"></span>
+      <span class="rank-name">全體基金加權平均</span>
+      <span class="mix-track">${segs(D.mkt_alloc,100)}</span>
+      <span class="rank-val"><span class="v">${fmt(D.total)}</span><span class="delta ${cls(D.total_mom)}">(${sign(D.total_mom)})</span></span>
+    </div>`;
+  html += top.map((f,i)=>`
+    <div class="mix-row">
+      <span class="rank-idx">${String(i+1).padStart(2,'0')}</span>
+      <span class="rank-name" title="${f.name}">${f.name}</span>
+      <span class="mix-track">${segs(f.alloc,(f.aum/max*100))}</span>
+      <span class="rank-val"><span class="v">${fmt(f.aum)}</span><span class="delta ${cls(f.mom)}">(${f.mom==null?'—':sign(f.mom)})</span></span>
+    </div>`).join('');
+  document.getElementById('mixList').innerHTML=html;
+})();
+
+
+/* ---- collapsible sections ---- */
+document.querySelectorAll('.fold-body').forEach(fb=>{
+  const sec = fb.closest('section');
+  sec.classList.add('fold');
+  const head = sec.querySelector('.sec-head');
+  const chev = sec.querySelector('.chev');
+  const toggle = ()=>{
+    sec.classList.toggle('closed');
+    chev.setAttribute('aria-expanded', String(!sec.classList.contains('closed')));
+  };
+  chev.setAttribute('aria-expanded','true');
+  head.addEventListener('click', toggle);
+});
+</script>
+</body>
+</html>
