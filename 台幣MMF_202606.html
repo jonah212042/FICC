@@ -44,7 +44,7 @@ h1 small{display:block;font-size:15px;font-weight:600;color:var(--ink-soft);lett
 .hero-num .label{font-size:13px;letter-spacing:.22em;color:var(--ink-soft);font-weight:700}
 .hero-num .big{font-family:var(--serif);font-weight:900;font-size:64px;line-height:1.05;margin:6px 0 2px}
 .hero-num .big em{font-style:normal;font-size:22px;font-weight:700;color:var(--ink-soft);margin-left:6px}
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
 .chip{border:1.5px solid var(--line);background:var(--card);border-radius:99px;padding:5px 13px;font-size:13px;color:var(--ink-soft)}
 .chip b{font-family:var(--mono);font-weight:600;color:var(--ink);margin-left:5px}
 .chip b.up{color:var(--up)} .chip b.dn{color:var(--dn)}
@@ -164,9 +164,9 @@ footer{margin-top:56px;padding-top:18px;border-top:3px solid var(--ink);display:
 
 <div class="hero">
   <div class="hero-num">
+    <div class="chips" id="chips"></div>
     <div class="label">2026年6月 市場總規模</div>
     <div class="big"><span class="num" id="totalNum"></span><em>億元</em></div>
-    <div class="chips" id="chips"></div>
   </div>
   <div class="chart-box" id="trendBox">
     <svg id="trend" viewBox="0 0 700 240" role="img" aria-label="市場總規模十五個月趨勢圖"></svg>
@@ -223,7 +223,6 @@ document.getElementById('totalNum').textContent = fmt(D.total,0);
 document.getElementById('chips').innerHTML = `
   <span class="chip">月增減<b class="${cls(D.total_mom)}">${sign(D.total_mom)}</b></span>
   <span class="chip">年增減<b class="${cls(D.total_yoy)}">${sign(D.total_yoy)}</b></span>
-  <span class="chip">基金檔數<b>${D.fund_count}</b></span>
   <span class="chip">前五大基金市占<b>${fmt(D.top5_share)}%</b></span>`;
 
 /* ---- trend chart (SVG) ---- */
